@@ -1,3 +1,5 @@
+# -*- coding: shift-jis
+
 def los(dis):
     print('los->', dis)
 def rot(dis):
@@ -50,7 +52,7 @@ plan.reverse()
 
 def plan_stop():
     order =  SpeechOrder()
-    order.utterace = ToBytes("‚Ä‚¢‚µ‚·‚é‚Ë")
+    order.utterace = ToBytes("ã¦ã„ã—ã™ã‚‹ã­")
     client.Send( order )
     
     order = RobotOrder()
@@ -59,11 +61,11 @@ def plan_stop():
 
 
 def red_stop():
-    '''FŒŸoŒ‹‰Ê‚ğóM'''
+    '''è‰²æ¤œå‡ºçµæœã‚’å—ä¿¡'''
     color = client.GetLastMsg[ColorBlobs]()
     if color:
         for i in range( color.data.Count ):
-            print "FŒŸo@id:" , color.data[i].id, " pos:",color.data[i].pos.x, color.data[i].pos.y, color.data[i].pos.z
+            print "è‰²æ¤œå‡ºã€€id:" , color.data[i].id, " pos:",color.data[i].pos.x, color.data[i].pos.y, color.data[i].pos.z
 
         plan_stop()
 
@@ -72,7 +74,7 @@ def isClision()
     info = client.GetLastMsg[RobotInfo]()
     if not info:
         return
-    print "Õ“Ë(¶C’†SC‰E):" , info.isClisionDetectedL , info.isClisionDetectedC , info.isClisionDetectedR
+    print "è¡çª(å·¦ï¼Œä¸­å¿ƒï¼Œå³):" , info.isClisionDetectedL , info.isClisionDetectedC , info.isClisionDetectedR
     return info.isClisionDetectedL or info.isClisionDetectedC or info.isClisionDetectedR    
 
 
@@ -91,7 +93,7 @@ def isFound()
     rightSide = False
     leftSide = False
 
-    # è‚ÌÀ•W‚Æ“ª‚ÌÀ•W‚ğŠî€‚Éè‚Ìó‘Ô‚ğ¯•Ê
+    # æ‰‹ã®åº§æ¨™ã¨é ­ã®åº§æ¨™ã‚’åŸºæº–ã«æ‰‹ã®çŠ¶æ…‹ã‚’è­˜åˆ¥
     if skeltons.data[0].joints[Skelton.SKEL_RIGHT_HAND].y - skeltons.data[0].joints[Skelton.SKEL_HEAD].y > 0: rightUp = True;
     if skeltons.data[0].joints[Skelton.SKEL_LEFT_HAND].y - skeltons.data[0].joints[Skelton.SKEL_HEAD].y > 0: leftUp = True;
 
@@ -101,16 +103,16 @@ def isFound()
     if skeltons.data[0].joints[Skelton.SKEL_RIGHT_HAND].x - skeltons.data[0].joints[Skelton.SKEL_RIGHT_SHOULDER].x < -300: rightSide = True;
     if skeltons.data[0].joints[Skelton.SKEL_LEFT_HAND].x - skeltons.data[0].joints[Skelton.SKEL_LEFT_SHOULDER].x > 300: leftSide = True;
 
-    print "‰EèF",
-    if rightUp:       print "ã",
-    if rightFront:    print "‘O",
-    if rightSide:     print "‰¡",
+    print "å³æ‰‹ï¼š",
+    if rightUp:       print "ä¸Š",
+    if rightFront:    print "å‰",
+    if rightSide:     print "æ¨ª",
     print
 
-    print "¶èF",
-    if leftUp:      print "ã",
-    if leftFront:   print "‘O",
-    if leftSide:    print "‰¡",
+    print "å·¦æ‰‹ï¼š",
+    if leftUp:      print "ä¸Š",
+    if leftFront:   print "å‰",
+    if leftSide:    print "æ¨ª",
     print
     
     return rightUp or leftUp or rightFront or leftFront or rightSide or leftSide
